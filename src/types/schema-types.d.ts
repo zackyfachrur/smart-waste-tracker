@@ -2,7 +2,7 @@ export type AuthenticationProps = {
     name?: string;
     email?: string;
     password?: string;
-    role?: string;
+    role_id?: string;
 }
 
 export type AuthState = {
@@ -14,5 +14,5 @@ export type ErrorsProps = {
     name?: string;
     email?: string;
     password?: string;
-    role?: string;
+    role_id?: string;
 }
