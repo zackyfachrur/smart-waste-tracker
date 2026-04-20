@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+
+
+:root {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+
+#root {
+  width: 1920px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+  scroll-behavior: smooth;
+  color: rgb(20, 20, 20);
+  overflow-x: hidden;
+}
+
