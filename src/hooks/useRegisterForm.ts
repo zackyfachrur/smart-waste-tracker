@@ -10,18 +10,20 @@ export const useRegisterForm = () => {
         name: "",
         email: "",
         password: "",
-        role: "user",
+        role_id: "",
     })
 
     const [errors, setErrors] = useState<ErrorsProps>({});
 
     const handleSubmit = ((e: React.FormEvent) => {
+        console.log("HALO FROM SUBMIT!")
         e.preventDefault();
 
         const result = registerSchema.safeParse(form);
 
         if (!result.success) {
             setErrors(getFieldErrors(result.error));
+            console.log(result.error);
             return;
         }
 
