@@ -7,7 +7,7 @@ import path from "path"
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/sampahcerdas/',
-   server: {
+  server: {
     proxy: {
       '/api': {
         target: 'https://birohmatika.com',

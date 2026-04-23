@@ -1,21 +1,23 @@
-import { useAuthPagesStore } from "@/store/auth.store";
+import { useBarrierAuthStore } from "@/store/barrier.auth.store";
 import { useState } from "react";
 import type { AuthenticationProps, ErrorsProps } from "@/types/schema-types";
 import { registerSchema } from "@/utils/authShema";
 import { getFieldErrors } from "@/helper/zodError";
+import { registerApi } from "@/services/auth.api"
 
 export const useRegisterForm = () => {
-    const { setPages } = useAuthPagesStore();
+    const { setPages } = useBarrierAuthStore();
     const [form, setForm] = useState<AuthenticationProps>({
         name: "",
         email: "",
         password: "",
+        confirmPassword: "",
         role_id: "",
     })
 
-    const [errors, setErrors] = useState<ErrorsProps>({});
 
-    const handleSubmit = ((e: React.FormEvent) => {
+    const [errors, setErrors] = useState<ErrorsProps>({});
+    const handleSubmit = async (e: React.FormEvent) => {
         console.log("HALO FROM SUBMIT!")
         e.preventDefault();
 
@@ -28,8 +30,22 @@ export const useRegisterForm = () => {
         }
 
         setErrors({});
-        console.log("VALID REGISTER: ", result.data)
-    })
+        // console.log("VALID REGISTER: ", result.data)
+
+        // SYNC API
+        try {
+            const data = await registerApi(result.data);
+            console.log("SUCCESS: ", data);
+            localStorage.setItem("token", data.token)
+
+            setPages("login");
+
+        } catch (err) {
+            console.error("Error: ", err);
+        }
+
+
+    }
 
     return {
         form,

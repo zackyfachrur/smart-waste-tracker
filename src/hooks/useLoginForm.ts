@@ -1,20 +1,28 @@
-import { useAuthPagesStore } from "@/store/auth.store";
+import { useBarrierAuthStore } from "@/store/barrier.auth.store";
 import type { AuthenticationProps, ErrorsProps } from "@/types/schema-types";
 import { useState } from "react";
 import { loginSchema } from "@/utils/authShema";
 import { getFieldErrors } from "@/helper/zodError";
+import { loginApi } from "@/services/auth.api"
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store/auth.store";
 
 export const useLoginForm = () => {
-    const { setPages } = useAuthPagesStore();
+    const navigate = useNavigate();
+    const { setPages } = useBarrierAuthStore();
+    const { login } = useAuthStore();
     const [form, setForm] = useState<AuthenticationProps>({
         email: "",
         password: "",
+        checked: false,
     });
 
     const [errors, setErrors] = useState<ErrorsProps>({});
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         const result = loginSchema.safeParse(form);
 
         if (!result.success) {
@@ -23,7 +31,25 @@ export const useLoginForm = () => {
         }
 
         setErrors({});
+        setLoading(true);
         console.log("VALID LOGIN", result.data);
+
+        try {
+            const res = await loginApi(result.data);
+
+            login(res, result.data.checked);
+
+            navigate("/");
+
+        } catch (err: any) {
+            console.error("Login error", err);
+
+            setErrors(err?.response?.data?.message || "Login gagal",)
+        } finally {
+            setLoading(false);
+        }
+
+
     }
 
     return {
@@ -31,6 +57,7 @@ export const useLoginForm = () => {
         setForm,
         setPages,
         errors,
-        handleSubmit
+        loading,
+        handleSubmit,
     }
 }

@@ -3,11 +3,27 @@ export type AuthenticationProps = {
     email?: string;
     password?: string;
     role_id?: string;
+    confirmPassword?: string;
+    checked?: boolean;
 }
 
 export type AuthState = {
+    token: string | null;
+    role_id: number | null;
+    login: (data: any, remember: boolean) => void;
+    logout: () => void;
+}
+
+export type BarrierAuthState = {
     pages: "login" | "register";
     setPages: (page: "login" | "register") => void;
+}
+
+export type DisplayState = {
+    display: boolean;
+    open: () => void;
+    close: () => void;
+    toggle: () => void;
 }
 
 export type ErrorsProps = {
@@ -15,4 +31,6 @@ export type ErrorsProps = {
     email?: string;
     password?: string;
     role_id?: string;
+    confirmPassword?: string;
+    checked?: boolean;
 }
