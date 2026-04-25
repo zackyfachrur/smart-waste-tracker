@@ -12,6 +12,7 @@ export type AuthState = {
     role_id: number | null;
     login: (data: any, remember: boolean) => void;
     logout: () => void;
+    initAuth: () => void;
 }
 
 export type BarrierAuthState = {

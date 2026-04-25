@@ -11,8 +11,6 @@ import GreenMarkerIcon from "@/assets/images/green-marker.png"
 import YellowMarkerIcon from "@/assets/images/yellow-marker.png"
 
 export const createIcon = ({ color }: { color?: string }) => {
-
-
     const iconMap: Record<string, string> = {
         "default": DefaultMarkerIcon,
         "red-marker": RedMarkerIcon,

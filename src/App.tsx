@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthenticationPages from "./features/authentication";
 import ProtectedRoute from "./components/General/ProtectedRoute";
 import PublicRoute from "./components/General/PublicRoute";
+import { useEffect } from "react";
+import { useAuthStore } from "./store/auth.store";
 
 // DEFAULT ENTRY
 // import RootRedirect from "./components/General/RouteRedirect"
@@ -13,7 +15,11 @@ import NotFound from "./NotFound";
 
 
 function App() {
+  const { initAuth } = useAuthStore();
 
+  useEffect(() => {
+    initAuth();
+  }, [])
 
   return (
     <BrowserRouter basename="/sampahcerdas">
