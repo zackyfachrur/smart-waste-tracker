@@ -32,11 +32,10 @@ export const useLoginForm = () => {
 
         setErrors({});
         setLoading(true);
-        console.log("VALID LOGIN", result.data);
 
         try {
             const res = await loginApi(result.data);
-
+            console.log("LOGIN RESULT: ", result.data);
             login(res, result.data.checked);
 
             navigate("/");

@@ -143,11 +143,6 @@ const RegisterForm = () => {
                 errorPopUp={errors.confirmPassword && <ErrorParagraph>{errors.confirmPassword}</ErrorParagraph>}
             />
 
-
-
-
-
-
             <span>Sudah memiliki akun ? <button className="font-bold text-black hover:underline-offset-2 hover:underline cursor-pointer"
                 onClick={() => setPages("login")}>Sign in</button></span>
 

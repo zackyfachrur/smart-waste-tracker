@@ -1,10 +1,9 @@
 import { useState, useRef } from "react";
-// import type { LocationType } from "@/types/maps";
 import { useAllLocation } from "@/hooks/useAllLocation";
-import DefaultMark from "@/assets/images/default-marker.png";
 import { useDisplayStore } from "@/store/display.store";
 import { useCenterLocationStore } from "@/store/center.location.store";
 import { useMarkContentStore } from "@/store/marker.content.store"
+import { GreenMarker, RedMarker, YellowMarker } from "@/constant/MarkIcon";
 
 const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
     const [search, setSearch] = useState("");
@@ -29,8 +28,14 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
         }
     };
 
+    const iconMap: Record<string, string> = {
+        "red-marker": RedMarker,
+        "green-marker": GreenMarker,
+        "yellow-marker": YellowMarker,
+    };
+
+
     return (
-        /* Fullscreen overlay dengan blur + dark background */
         <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
             onClick={handleOverlayClick}
@@ -101,7 +106,7 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
                                     }}
                                 >
                                     <img
-                                        src={DefaultMark}
+                                        src={iconMap[String(item.marker)]}
                                         className="h-[36px] w-[36px] object-contain flex-shrink-0"
                                         alt="Marker"
                                     />

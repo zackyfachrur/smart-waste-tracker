@@ -1,4 +1,5 @@
 import { formatRelativeTime } from "@/helper/formatRelativeTime";
+import { useAuthStore } from "@/store/auth.store";
 
 type Props = {
     content?: string;
@@ -17,6 +18,7 @@ export const MarkContentPopUp = ({
     onClose,
     marker
 }: Props) => {
+    const { role_id } = useAuthStore();
 
     if (!open) return null;
 
@@ -45,7 +47,8 @@ export const MarkContentPopUp = ({
             <ul className="flex flex-col w-full justify-between  rounded-2xl">
                 <li>{content}</li>
             </ul>
-            {marker && <span className={`${selectedIcon} p-4 rounded-2xl mt-4`}>{selectedStatus}</span>}
+            {marker && role_id === 2 && <span className={`${selectedIcon} p-4 rounded-2xl mt-4`}>{selectedStatus}</span>}
+            {marker && role_id === 3 && <span className={`${selectedIcon} p-4 rounded-2xl mt-4`}>Driver</span>}
 
             <div className="flex flex-col gap-2 mt-4 w-full border-t">
                 <ul className="flex flex-row w-full justify-between items-center rounded-2xl text-sm mt-4">

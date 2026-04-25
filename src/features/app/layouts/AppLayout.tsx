@@ -6,6 +6,7 @@ import { useDisplayStore } from "@/store/display.store"
 
 const AppLayout = () => {
     const { open } = useDisplayStore();
+
     return (
         <SidebarProvider
             className="bg-muted"
@@ -19,6 +20,7 @@ const AppLayout = () => {
                     <SidebarTrigger className="cursor-pointer bg-background p-4 h-14 w-14 shadow-sm" />
                     <SearchLocation onClick={open} />
                 </header>
+
                 {/* Content */}
                 <main className="flex-1 rounded-xl bg-background">
                     <Outlet />
