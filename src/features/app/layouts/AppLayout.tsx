@@ -6,10 +6,12 @@ import { useDisplayStore } from "@/store/add.mark.store"
 import { ButtonRequestMarker } from "@/features/app/components/ButttonRequestMarker"
 import { useRequestMarkStore } from "@/store/request.mark.store"
 import { RequestForm } from "@/features/app/components/RequestForm";
+import { useAuthStore } from "@/store/auth.store";
 
 const AppLayout = () => {
     const { open } = useDisplayStore();
     const { sendRequest, statusRequest } = useRequestMarkStore();
+    const { role_id } = useAuthStore();
 
     return (
         <SidebarProvider
@@ -25,12 +27,19 @@ const AppLayout = () => {
                     <SearchLocation onClick={open} />
                 </header>
 
-                <ButtonRequestMarker onClick={sendRequest} />
                 {
-                    statusRequest && (
-                        <RequestForm />
+                    role_id === 2 && (
+                        <>
+                            <ButtonRequestMarker onClick={sendRequest} />
+                            {
+                                statusRequest && (
+                                    <RequestForm />
+                                )
+                            }
+                        </>
                     )
                 }
+
 
                 {/* Content */}
                 <main className="flex-1 rounded-xl bg-background">
