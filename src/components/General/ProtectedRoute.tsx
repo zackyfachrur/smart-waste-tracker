@@ -1,3 +1,4 @@
+// src/components/General/ProtectedRoute.tsx
 import { Outlet, Navigate } from "react-router-dom";
 
 const getAuth = () => {

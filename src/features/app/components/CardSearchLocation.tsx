@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useAllLocation } from "@/hooks/useAllLocation";
-import { useDisplayStore } from "@/store/display.store";
+import { useDisplayStore } from "@/store/add.mark.store";
 import { useCenterLocationStore } from "@/store/center.location.store";
 import { useMarkContentStore } from "@/store/marker.content.store"
 import { GreenMarker, RedMarker, YellowMarker } from "@/constant/MarkIcon";
@@ -17,7 +17,8 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
     const { setContent } = useMarkContentStore();
 
     const filteredLocations = location.filter((item) =>
-        String(item.content).toLowerCase().includes(search.toLowerCase())
+        String(item.content).toLowerCase().includes(search.toLowerCase()) ||
+        String(item.name).toLowerCase().includes(search.toLowerCase())
     );
 
     if (!display) return null;
@@ -43,7 +44,7 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
             {/* Card */}
             <div
                 ref={cardRef}
-                className="relative w-[400px] bg-white rounded-2xl shadow-2xl p-4 flex flex-col gap-2"
+                className="relative sm:w-[400px] w-[360px] bg-white rounded-2xl shadow-2xl p-4 flex flex-col gap-2"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
@@ -96,6 +97,9 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
                                             content: String(item.content),
                                         })
                                         setContent({
+                                            name: (String(item.name)),
+                                            lat: (String(item.latitude)),
+                                            lng: String(item.longitude),
                                             marker: String(item.marker),
                                             content: String(item.content),
                                             createdAt: String(item.created_at),
@@ -110,9 +114,14 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
                                         className="h-[36px] w-[36px] object-contain flex-shrink-0"
                                         alt="Marker"
                                     />
-                                    <span className="text-sm font-medium truncate">
-                                        {item.content}
-                                    </span>
+                                    <div className="flex flex-col text-start">
+                                        <span className="text-sm font-semibold truncate">
+                                            {item.name}
+                                        </span>
+                                        <span className="text-sm font-medium truncate">
+                                            {item.content}
+                                        </span>
+                                    </div>
                                 </div>
                             ))
                         ) : (

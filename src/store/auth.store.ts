@@ -2,11 +2,13 @@ import { create } from "zustand";
 import type { AuthState } from "@/types/schema-types";
 
 export const useAuthStore = create<AuthState>((set) => ({
+    user_id: null,
     token: null,
     role_id: null,
 
     login: (data, remember) => {
         const normalized = {
+            user_id: Number(data.userinfo.id),
             token: data.token,
             role_id: Number(data.userinfo.role_id),
         };
@@ -22,7 +24,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         localStorage.removeItem("auth");
         sessionStorage.removeItem("auth");
 
-        set({ token: null, role_id: null });
+        set({ user_id: null, token: null, role_id: null });
 
         window.location.href = "/sampahcerdas/authentication";
     },
@@ -37,11 +39,12 @@ export const useAuthStore = create<AuthState>((set) => ({
             try {
                 const parsed = JSON.parse(stored);
                 set({
+                    user_id: parsed.user_id,
                     token: parsed.token,
                     role_id: parsed.role_id,
                 });
             } catch {
-                set({ token: null, role_id: null });
+                set({ user_id: null, token: null, role_id: null });
             }
         }
     },

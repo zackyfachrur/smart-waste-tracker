@@ -8,6 +8,7 @@ export type AuthenticationProps = {
 }
 
 export type AuthState = {
+    user_id: number | null,
     token: string | null;
     role_id: number | null;
     login: (data: any, remember: boolean) => void;
