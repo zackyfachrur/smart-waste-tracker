@@ -48,7 +48,7 @@ const LoginForm = () => {
                 <p className="ms-2 text-sm font-medium text-heading select-none">Remember me</p>
             </label>
 
-            <span>Belum memiliki akun ? <button className="font-bold text-black hover:underline-offset-2 hover:underline cursor-pointer"
+            <span>Belum memiliki akun ? <button type="button" className="font-bold text-black hover:underline-offset-2 hover:underline cursor-pointer"
                 onClick={() => setPages("register")}>Sign up</button></span>
 
             <button type="submit" className="bg-lime-800 px-4 py-4 rounded-2xl text-white font-bold active:scale-95 cursor-pointer hover:bg-lime-700">Sign in</button>
