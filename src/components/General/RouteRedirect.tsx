@@ -1,3 +1,4 @@
+// src/components/General/RouteRedirect.tsx
 import { Navigate } from "react-router-dom";
 
 const RootRedirect = () => {

@@ -3,6 +3,11 @@ import L from "leaflet";
 import "leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
 import "leaflet.awesome-markers";
 
+// Type
+import type { addMarkHandlerType } from "@/types/maps";
+
+// Store
+import { usePopUpMark } from "@/store/popup.mark.store";
 
 // Marker Icon
 import DefaultMarkerIcon from "@/assets/images/default-marker.png"
@@ -29,15 +34,13 @@ export const createIcon = ({ color }: { color?: string }) => {
 }
 
 
-export const AddMarkHandler = ({ setLocation, setShowPopup }: any) => {
+export const AddMarkHandler = ({ setLocation }: addMarkHandlerType) => {
+    const { openPopUp } = usePopUpMark();
+
     useMapEvents({
         click(e) {
-            setLocation({
-                lat: e.latlng.lat,
-                lng: e.latlng.lng,
-            });
-
-            setShowPopup(true);
+            setLocation({ lat: e.latlng.lat, lng: e.latlng.lng });
+            openPopUp();
         },
     });
 

@@ -9,7 +9,9 @@
     ],
     "module": "esnext",
     "types": [
-      "vite/client"
+      "vite/client",
+      "react",
+      "react-dom"
     ],
     "skipLibCheck": true,
     /* Bundler mode */
