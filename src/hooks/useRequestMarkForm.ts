@@ -5,11 +5,12 @@ import { useState } from "react"
 
 const DEFAULT_STATUS_ID = "1";
 
-export const useRequestMarkForm = () => {
-    const { token, user_id, } = useAuthStore()
+export const useRequestMarkForm = (onSuccess?: () => void) => {
+    const { user_id, } = useAuthStore()
     const { cancelRequest } = useRequestMarkStore()
 
     const [reason, setReason] = useState("")
+    const [content, setContent] = useState("");
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
@@ -25,11 +26,15 @@ export const useRequestMarkForm = () => {
         setError(null)
 
         try {
+            setContent(reason);
             await addRequestMarkerApi({
-                user_id: String(user_id),
+                requester: String(user_id),
                 reason,
+                content,
                 status_id: DEFAULT_STATUS_ID,
-            }, String(token))
+                created_by: String(user_id),
+            });
+            onSuccess?.();
             cancelRequest()
         } catch (err) {
             setError("Failed to submit request. Please try again.")
@@ -46,5 +51,5 @@ export const useRequestMarkForm = () => {
         error,
         handleSubmit,
         cancelRequest,
-    }   
+    }
 }

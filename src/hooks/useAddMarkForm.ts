@@ -9,7 +9,7 @@ type FormState = {
     longitude: string;
 };
 
-export const useAddMarkForm = (onSuccess?: () => void) => {
+export const useAddMarkForm = () => {
     const { user_id } = useAuthStore();
     const [loadingMark, setLoadingMark] = useState(false);
     const [errorMark, setErrorMark] = useState<string | null>(null);
@@ -92,7 +92,6 @@ export const useAddMarkForm = (onSuccess?: () => void) => {
             });
             setForm({ name: "", marker: "", latitude: "", longitude: "" });
             setContent("");
-            onSuccess?.();
         } catch (err) {
             const message = err instanceof Error ? err.message : "Something went wrong";
             setErrorMark(message);
