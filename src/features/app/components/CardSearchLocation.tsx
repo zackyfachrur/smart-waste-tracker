@@ -9,7 +9,6 @@ const CardSearchLocation = ({ onClick }: { onClick: () => void }) => {
     const [search, setSearch] = useState("");
     const { location } = useAllLocation();
 
-
     const cardRef = useRef<HTMLDivElement>(null);
 
     const { display, close } = useDisplayStore();

@@ -7,11 +7,16 @@ import { ButtonRequestMarker } from "@/features/app/components/ButttonRequestMar
 import { useRequestMarkStore } from "@/store/request.mark.store"
 import { RequestForm } from "@/features/app/components/RequestForm";
 import { useAuthStore } from "@/store/auth.store";
+import { NotificationButton } from "../components/NotificationButton";
+import { useState } from "react";
+import { NotificationRequest } from "../components/NotificationRequest";
+import { NotificationRequestAdmin } from "../components/NotificationRequestAdmin";
 
 const AppLayout = () => {
     const { open } = useDisplayStore();
     const { sendRequest, statusRequest } = useRequestMarkStore();
     const { role_id } = useAuthStore();
+    const [notification, setNotification] = useState(false);
 
     return (
         <SidebarProvider
@@ -25,8 +30,19 @@ const AppLayout = () => {
                 <header className="fixed z-50 flex h-fit shrink-0 items-center gap-4 rounded-xl m-4">
                     <SidebarTrigger className="cursor-pointer bg-background p-4 h-14 w-14 shadow-sm" />
                     <SearchLocation onClick={open} />
+                    <NotificationButton onClick={() => setNotification(!notification)} />
+                    {(role_id === 2 || role_id === 3) &&
+                        (
+                            <NotificationRequest display={notification ? "flex" : "hidden"} />
+                        )
+                    }
+                    {
+                        role_id === 1 &&
+                        (
+                            <NotificationRequestAdmin display={notification ? "flex" : "hidden"} />
+                        )
+                    }
                 </header>
-
                 {
                     role_id === 2 && (
                         <>

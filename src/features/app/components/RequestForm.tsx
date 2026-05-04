@@ -39,7 +39,7 @@ export const RequestForm = () => {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="bg-primary text-white p-4 rounded-xl w-full disabled:opacity-50"
+                            className="bg-primary cursor-pointer hover:bg-lime-700 text-white p-4 rounded-xl w-full disabled:opacity-50"
                         >
                             {isLoading ? "Submitting..." : "Request"}
                         </button>
