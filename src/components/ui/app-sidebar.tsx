@@ -24,18 +24,18 @@ export const AppSidebar = () => {
                 <SidebarGroup>
                     <nav className="flex flex-col gap-2 px-4">
                         <Link
-                            to="/user"
+                            to="/"
                             className={location.pathname === "/" ? "bg-lime-800 text-white p-4 rounded-xl text-start" : "text-start p-4"}
                         >
-                            <i className="ri-dashboard-2-line"></i> Analytics
+                            <i className="ri-road-map-fill"></i> Maps
                         </Link>
 
-                        {/* <Link
-                            to="/history"
-                            className={location.pathname === "/history" ? "bg-lime-800 text-white p-4 rounded-xl text-start" : "text-start p-4"}
+                        <Link
+                            to="/education"
+                            className={location.pathname === "/education" ? "bg-lime-800 text-white p-4 rounded-xl text-start" : "text-start p-4"}
                         >
-                            <i className="ri-delete-bin-line"></i> History
-                        </Link> */}
+                            <i className="ri-book-shelf-fill"></i> Education
+                        </Link>
                     </nav>
                 </SidebarGroup>
             </SidebarContent>
