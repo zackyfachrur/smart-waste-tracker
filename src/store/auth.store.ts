@@ -28,7 +28,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 
         set({ user_id: null, token: null, role_id: null, name: null });
 
-        window.location.href = "/mobile/authentication";
     },
 
     initAuth: () => {
