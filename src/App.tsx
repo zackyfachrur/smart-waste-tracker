@@ -12,6 +12,7 @@ import { useAuthStore } from "./store/auth.store";
 // USER
 import AppLayout from "./features/app/layouts/AppLayout"
 import AppDashboard from "./features/app/pages/AppDashboard";
+import DashboardWaste from "./features/app/pages/DashboardWaste";
 import NotFound from "./NotFound";
 
 
@@ -23,7 +24,7 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter basename="/sampahcerdas">
+    <BrowserRouter basename="/mobile">
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path="/authentication" element={<AuthenticationPages />} />
@@ -33,6 +34,13 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<AppDashboard />} />
+          </Route>
+        </Route>
+
+        {/* WASTE DASHBOARD */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/education" element={<AppLayout />}>
+            <Route index element={<DashboardWaste />} />
           </Route>
         </Route>
 

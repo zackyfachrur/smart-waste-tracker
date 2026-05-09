@@ -36,4 +36,5 @@ export type ErrorsProps = {
     role_id?: string;
     confirmPassword?: string;
     checked?: boolean;
+    general?: string;
 }

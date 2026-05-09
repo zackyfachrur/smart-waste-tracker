@@ -7,11 +7,11 @@ import path from "path"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/sampahcerdas/',
+  base: '/mobile/',
   server: {
     proxy: {
       '/api': {
-        target: 'https://birohmatika.com',
+        target: 'https://sampahcerdas.com',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, '/biomcu'),

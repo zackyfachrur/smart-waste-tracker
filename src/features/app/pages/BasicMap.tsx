@@ -30,7 +30,6 @@ const MapInput = () => {
     // console.log("CONTENT MAPS: ", content);
 
 
-
     if (loading) return <Loader />
     if (error) return <span>{error}</span>
 

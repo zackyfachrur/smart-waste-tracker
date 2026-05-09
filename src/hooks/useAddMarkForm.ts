@@ -9,7 +9,7 @@ type FormState = {
     longitude: string;
 };
 
-export const useAddMarkForm = () => {
+export const useAddMarkForm = (refetch: () => Promise<void>) => {
     const { user_id } = useAuthStore();
     const [loadingMark, setLoadingMark] = useState(false);
     const [errorMark, setErrorMark] = useState<string | null>(null);
@@ -77,6 +77,7 @@ export const useAddMarkForm = () => {
 
         setLoadingMark(true);
         setErrorMark(null);
+
         // DEBUG
         // console.log("SUBMIT form.name:", form.name);
         // console.log("SUBMIT content:", content);
@@ -90,6 +91,9 @@ export const useAddMarkForm = () => {
                 content: content || `${form.latitude}, ${form.longitude}`,
                 created_by: user_id,
             });
+
+            await refetch();
+
             setForm({ name: "", marker: "", latitude: "", longitude: "" });
             setContent("");
         } catch (err) {
@@ -100,5 +104,5 @@ export const useAddMarkForm = () => {
         }
     };
 
-    return { form, handleChange, handleSubmit, setCoords, loadingMark, errorMark, loadingCoords, resetForm };
+    return { form, handleChange, handleSubmit, setCoords, loadingMark, errorMark, loadingCoords, resetForm, refetch };
 };

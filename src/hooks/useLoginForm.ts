@@ -43,7 +43,15 @@ export const useLoginForm = () => {
         } catch (err: any) {
             console.error("Login error", err);
 
-            setErrors(err?.response?.data?.message || "Login gagal",)
+            const message = err?.response?.data?.message;
+
+            if (typeof message === "string") {
+                setErrors({ general: message });
+            } else if (typeof message === "object") {
+                setErrors(message);
+            } else {
+                setErrors({ general: "Failed to login, please check your password." });
+            }
         } finally {
             setLoading(false);
         }
